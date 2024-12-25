@@ -41,6 +41,9 @@ public class UserDetail {
     @Column(name = "TBO001_USR_EML",nullable = false)
     private String mail;
 
+    @OneToOne(mappedBy = "userDetail",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private UserPassword userPassword;
+
     @Embedded
     @AttributeOverride(name="createdTime",column = @Column(name="TBO001_CREATE_S",nullable = false))
     @AttributeOverride(name="createdBy",column = @Column(name="TBO001_CREATE_USR_C",nullable = false))

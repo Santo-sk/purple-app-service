@@ -8,4 +8,10 @@ import org.springframework.stereotype.Repository;
 public interface UserDetailRepository  extends JpaRepository<UserDetail,Long> {
 
     UserDetail findByDisplayName(String name);
+
+    Boolean existsByDisplayNameIgnoreCase(String name);
+
+    Boolean existsByMailIgnoreCase(String mail);
+
+    Boolean existsByContactNo(String contactNo);
 }

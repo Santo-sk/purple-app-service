@@ -19,5 +19,6 @@ public class UserDetailModel {
     String gender;
     Date dob;
     String mail;
+    String password;
 
 }

@@ -7,4 +7,10 @@ public interface IUserDetailsService {
     UserDetailModel saveUserDetail(UserDetailModel model);
 
     void deleteUser(String displayName);
+
+    Boolean checkUserNameExist(String displayName);
+
+    Boolean checkMailExist(String mail);
+
+    Boolean checkContactNoExist(String contactNo);
 }

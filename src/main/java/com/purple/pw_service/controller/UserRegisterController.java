@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 @Slf4j
 @RequestMapping(path ="/api/userDetails")
@@ -23,5 +24,20 @@ public class UserRegisterController {
     @PostMapping(path = "/deleteUser/{displayName}",produces = "application/json")
     public void deleteUser(@PathVariable String displayName){
         userService.deleteUser(displayName);
+    }
+
+    @GetMapping(path = "/checkUserNameExist/{displayName}",produces = "application/json")
+    public Boolean checkUserNameExist(@PathVariable String displayName){
+        return userService.checkUserNameExist(displayName);
+    }
+
+    @GetMapping(path = "/checkMailExist/{mail}",produces = "application/json")
+    public Boolean checkMailExist(@PathVariable String mail){
+        return userService.checkMailExist(mail);
+    }
+
+    @GetMapping(path = "/checkContactNoExist/{contactNo}",produces = "application/json")
+    public Boolean checkContactNoExist(@PathVariable String contactNo){
+        return userService.checkContactNoExist(contactNo);
     }
 }
