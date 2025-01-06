@@ -7,6 +7,7 @@ import com.purple.pw_service.repository.UserDetailCredRepository;
 import com.purple.pw_service.repository.UserDetailRepository;
 import com.purple.pw_service.service.IUserDetailsService;
 import com.purple.pw_service.util.CommonService;
+import com.purple.pw_service.util.EmailUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,10 @@ public class UserDetailService implements IUserDetailsService {
     UserDetailRepository userDetailRepo;
     @Autowired
     UserDetailCredRepository userDetailCredRepo;
+
+    @Autowired
+    EmailService emailService;
+
 
     public Boolean checkUserNameExist(String displayName){
         return userDetailRepo.existsByDisplayNameIgnoreCase(displayName);
@@ -46,6 +51,7 @@ public class UserDetailService implements IUserDetailsService {
         userDetail.setAudit(CommonService.setAudit(model.getDisplayName()));
         UserDetail savedUser=userDetailRepo.save(userDetail);
         setUserPassWord(savedUser.getUserKey(),model.getPassword());
+        this.emailService.sendEmail(model.getMail(), EmailUtils.WELCOME_MSG, EmailUtils.getWelcomeMessage(model.getDisplayName()));
         return model;
     }
 
